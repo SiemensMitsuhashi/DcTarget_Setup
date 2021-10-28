@@ -2,7 +2,7 @@
 #complete configration deployment_center\install_config.properties
 
 $title = "*** confirm ***"
-$message = "Did you install java?"
+$message = "Did you install java and check to access Deploymentcenter Server?"
 $objYes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes","Yes"
 $objNo = New-Object System.Management.Automation.Host.ChoiceDescription "&No","No"
 $objOptions = [System.Management.Automation.Host.ChoiceDescription[]]($objYes, $objNo)
@@ -29,21 +29,3 @@ invoke-sqlCmd @Params
 Stop-Service SQLSERVERAGENT
 Restart-Service MSSQLSERVER -Force
 Start-Service SQLSERVERAGENT
-
-# Consider expanding this logic to automate installation via Chocolatey
-     if ((Get-Command "choco.exe" -ErrorAction SilentlyContinue) -eq $null) { 
-         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-     }
-
-
-$CHOCO_TARGETS = @('googlechrome', 'notepadplusplus' , '7zip','tomcat', 'ant','git','gh')
-     ForEach ($target in $CHOCO_TARGETS) {
-         choco install $target /y
-		}
-
-
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-
-cd C:\
-
-git clone https://github.com/SiemensMitsuhashi/DcTarget_Setup.git
