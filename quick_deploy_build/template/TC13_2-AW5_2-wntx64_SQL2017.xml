@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.3"/>
+        <software id="MicroServiceFramework" version="5.2.2"/>
+        <software id="ActiveWorkspace" version="5.2.3"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="@TARGET_MACHINE@" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="@TARGET_MACHINE@" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="@SYS_PASS@" encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="@STD_PASS@" encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="fnd0_j2ee_tcLocale" value="ja_JP"/>
+            <property id="fnd0_j2ee_treeCachePeersHost" value="@TARGET_MACHINE@"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="@STD_PASS@" encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="@SYS_PASS@" encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="@STD_PASS@" encrypted="false"/>
+            <property id="aws2_machineUser" value="@TARGET_MACHINE@\@SYS_USER@"/>
+            <property id="aws2_machinePassword" value="@SYS_PASS@" encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="@STD_PASS@" encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="@TARGET_MACHINE@" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="@TARGET_MACHINE@" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="@TARGET_MACHINE@" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="@TARGET_MACHINE@" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="@TARGET_MACHINE@" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="@TARGET_MACHINE@" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="@JAVA_HOME@"/>
+        <property id="MachineUser" value="@TARGET_MACHINE@\@SYS_USER@"/>
+        <property id="MachineUserPassword" value="@SYS_PASS@" encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>

@@ -1,0 +1,1600 @@
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - Utility can not be processed because following required arguments and its value are missing :
+ * -dcusername
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - Please read the below Usage Details
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - Usage Details: 
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - NAME: Quick Deploy Utility 
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  This utility will run in two modes import and export. Default mode is import if not specified.
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  To run in default Import mode:
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  This utility will take as input an XML file that specifies the details of how the environment should be created including
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  pre-configured choices for software versions, applications, components and parameter settings.
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  When this utility is completed, a new environment will have been created in the Deployment Center and the deploy scripts automatically generated.
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  The next step would be for you to execute the deploy scripts on the target machine(s) to complete the installation. 
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for naming the quick-deploy environment>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  	-inputFile=<This is absolute file path of *quick_deploy_configuration.xml, that specify all the configuration related to quick-deploy.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - The following list are the optional arguments for this utility. 
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  	-machine=<This indicates name of the machine. The script will be generated for this specified machine.
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  		   This parameter will take current machine name of the user by default if is not specified.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -   	-platform=<This indicate the platform whether it is windows/linux or any other OS platform. The script will be generated for specified machine platform.
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -   		   This parameter will take machine platform of the user by default if is not specified.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -         -scriptDirectoryName=<This indicates the root directory name under which we want to create the deployment script Zip files .
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -                      This parameter will take script directory name provided by user, if not provided then default value would be current timestamp. 
+			 Also script directory name value should only have characters ,digits and underscore. It should not allow spaces and special characters.>
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -         -scriptsDir=<Deployment Center Script Generation Directory
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -                      This parameter will generate the deploy scripts into the location specified by the -scriptsDir which is pre-configured by the administrator.>
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -    EXAMPLE:
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpassword=dcadmin -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64 -scriptsDir=scriptsDir1
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  
+ To run in Export mode:
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-mode=<This argument would be used to specify the mode. Allowed values for modes are : import or export>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for name of the environment in the DC to export.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  	-exportfile=<This is absolute file path where the Quick deploy file would be exported.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-exportType=<The export type. Allowed values for export type are: Full or Lean.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -mode=export -environment=test_env
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -                  -exportType=Full -exportfile=C:\quick_deploy.xml -dcusername=dcadmin -dcpassword=dcadmin
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - NAME:  Password Encryption Utility (Optional)
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - This utility is optional and generates the encrypted password. Encrypted password should be placed in the configuration file with the attribute encrypted='true' 
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - eg: <property id='xyz'  value='<encrypted password>' encrypted='true' />
+
+2021-10-27 14:09:06 INFO  - DcQuickDeploy - UTILITY EXAMPLE:
+2021-10-27 14:09:06 INFO  - DcQuickDeploy -  dc_quick_deploy.bat -encrypt=<plain text password>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - Utility can not be processed because following required arguments and its value are missing :
+ * -dcurl
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - Please read the below Usage Details
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - Usage Details: 
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - NAME: Quick Deploy Utility 
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  This utility will run in two modes import and export. Default mode is import if not specified.
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  To run in default Import mode:
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  This utility will take as input an XML file that specifies the details of how the environment should be created including
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  pre-configured choices for software versions, applications, components and parameter settings.
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  When this utility is completed, a new environment will have been created in the Deployment Center and the deploy scripts automatically generated.
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  The next step would be for you to execute the deploy scripts on the target machine(s) to complete the installation. 
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for naming the quick-deploy environment>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  	-inputFile=<This is absolute file path of *quick_deploy_configuration.xml, that specify all the configuration related to quick-deploy.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - The following list are the optional arguments for this utility. 
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  	-machine=<This indicates name of the machine. The script will be generated for this specified machine.
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  		   This parameter will take current machine name of the user by default if is not specified.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -   	-platform=<This indicate the platform whether it is windows/linux or any other OS platform. The script will be generated for specified machine platform.
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -   		   This parameter will take machine platform of the user by default if is not specified.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -         -scriptDirectoryName=<This indicates the root directory name under which we want to create the deployment script Zip files .
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -                      This parameter will take script directory name provided by user, if not provided then default value would be current timestamp. 
+			 Also script directory name value should only have characters ,digits and underscore. It should not allow spaces and special characters.>
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -         -scriptsDir=<Deployment Center Script Generation Directory
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -                      This parameter will generate the deploy scripts into the location specified by the -scriptsDir which is pre-configured by the administrator.>
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -    EXAMPLE:
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpassword=dcadmin -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64 -scriptsDir=scriptsDir1
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  
+ To run in Export mode:
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-mode=<This argument would be used to specify the mode. Allowed values for modes are : import or export>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for name of the environment in the DC to export.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  	-exportfile=<This is absolute file path where the Quick deploy file would be exported.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-exportType=<The export type. Allowed values for export type are: Full or Lean.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -mode=export -environment=test_env
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -                  -exportType=Full -exportfile=C:\quick_deploy.xml -dcusername=dcadmin -dcpassword=dcadmin
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - NAME:  Password Encryption Utility (Optional)
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - This utility is optional and generates the encrypted password. Encrypted password should be placed in the configuration file with the attribute encrypted='true' 
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - eg: <property id='xyz'  value='<encrypted password>' encrypted='true' />
+
+2021-10-27 14:12:31 INFO  - DcQuickDeploy - UTILITY EXAMPLE:
+2021-10-27 14:12:31 INFO  - DcQuickDeploy -  dc_quick_deploy.bat -encrypt=<plain text password>
+2021-10-27 14:13:15 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 14:13:15
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 14:13:15 DEBUG - DcQuickDeploy - Error while reading content of configuration files. Internal error message is : EC2AMAZ-TVQ70TN_Env.xml (指定されたファイルが見つかりません。)
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 
+There are one or more validation errors found.  
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  The provided input path file is either invalid or file with provided name do not exist.Provide the valid file path in the argument  '-inputfile'
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - Please read the below Usage Details
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - Usage Details: 
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - NAME: Quick Deploy Utility 
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  This utility will run in two modes import and export. Default mode is import if not specified.
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  To run in default Import mode:
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  This utility will take as input an XML file that specifies the details of how the environment should be created including
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  pre-configured choices for software versions, applications, components and parameter settings.
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  When this utility is completed, a new environment will have been created in the Deployment Center and the deploy scripts automatically generated.
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  The next step would be for you to execute the deploy scripts on the target machine(s) to complete the installation. 
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for naming the quick-deploy environment>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  	-inputFile=<This is absolute file path of *quick_deploy_configuration.xml, that specify all the configuration related to quick-deploy.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - The following list are the optional arguments for this utility. 
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  	-machine=<This indicates name of the machine. The script will be generated for this specified machine.
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  		   This parameter will take current machine name of the user by default if is not specified.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -   	-platform=<This indicate the platform whether it is windows/linux or any other OS platform. The script will be generated for specified machine platform.
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -   		   This parameter will take machine platform of the user by default if is not specified.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -         -scriptDirectoryName=<This indicates the root directory name under which we want to create the deployment script Zip files .
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -                      This parameter will take script directory name provided by user, if not provided then default value would be current timestamp. 
+			 Also script directory name value should only have characters ,digits and underscore. It should not allow spaces and special characters.>
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -         -scriptsDir=<Deployment Center Script Generation Directory
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -                      This parameter will generate the deploy scripts into the location specified by the -scriptsDir which is pre-configured by the administrator.>
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -    EXAMPLE:
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpassword=dcadmin -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64 -scriptsDir=scriptsDir1
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  
+ To run in Export mode:
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-mode=<This argument would be used to specify the mode. Allowed values for modes are : import or export>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for name of the environment in the DC to export.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  	-exportfile=<This is absolute file path where the Quick deploy file would be exported.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-exportType=<The export type. Allowed values for export type are: Full or Lean.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -mode=export -environment=test_env
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -                  -exportType=Full -exportfile=C:\quick_deploy.xml -dcusername=dcadmin -dcpassword=dcadmin
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - NAME:  Password Encryption Utility (Optional)
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - This utility is optional and generates the encrypted password. Encrypted password should be placed in the configuration file with the attribute encrypted='true' 
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - eg: <property id='xyz'  value='<encrypted password>' encrypted='true' />
+
+2021-10-27 14:13:15 INFO  - DcQuickDeploy - UTILITY EXAMPLE:
+2021-10-27 14:13:15 INFO  - DcQuickDeploy -  dc_quick_deploy.bat -encrypt=<plain text password>
+2021-10-27 14:14:26 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 14:14:26
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 14:14:26 DEBUG - DcQuickDeploy - Error while reading content of configuration files. Internal error message is : EC2AMAZ-TVQ70TN_Env.xml (指定されたファイルが見つかりません。)
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 
+There are one or more validation errors found.  
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  The provided input path file is either invalid or file with provided name do not exist.Provide the valid file path in the argument  '-inputfile'
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - Please read the below Usage Details
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - Usage Details: 
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - NAME: Quick Deploy Utility 
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  This utility will run in two modes import and export. Default mode is import if not specified.
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  To run in default Import mode:
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  This utility will take as input an XML file that specifies the details of how the environment should be created including
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  pre-configured choices for software versions, applications, components and parameter settings.
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  When this utility is completed, a new environment will have been created in the Deployment Center and the deploy scripts automatically generated.
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  The next step would be for you to execute the deploy scripts on the target machine(s) to complete the installation. 
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for naming the quick-deploy environment>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  	-inputFile=<This is absolute file path of *quick_deploy_configuration.xml, that specify all the configuration related to quick-deploy.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - The following list are the optional arguments for this utility. 
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  	-machine=<This indicates name of the machine. The script will be generated for this specified machine.
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  		   This parameter will take current machine name of the user by default if is not specified.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -   	-platform=<This indicate the platform whether it is windows/linux or any other OS platform. The script will be generated for specified machine platform.
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -   		   This parameter will take machine platform of the user by default if is not specified.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -         -scriptDirectoryName=<This indicates the root directory name under which we want to create the deployment script Zip files .
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -                      This parameter will take script directory name provided by user, if not provided then default value would be current timestamp. 
+			 Also script directory name value should only have characters ,digits and underscore. It should not allow spaces and special characters.>
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -         -scriptsDir=<Deployment Center Script Generation Directory
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -                      This parameter will generate the deploy scripts into the location specified by the -scriptsDir which is pre-configured by the administrator.>
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -    EXAMPLE:
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpassword=dcadmin -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64 -scriptsDir=scriptsDir1
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  
+ To run in Export mode:
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-mode=<This argument would be used to specify the mode. Allowed values for modes are : import or export>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for name of the environment in the DC to export.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  	-exportfile=<This is absolute file path where the Quick deploy file would be exported.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-exportType=<The export type. Allowed values for export type are: Full or Lean.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -mode=export -environment=test_env
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -                  -exportType=Full -exportfile=C:\quick_deploy.xml -dcusername=dcadmin -dcpassword=dcadmin
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - NAME:  Password Encryption Utility (Optional)
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - This utility is optional and generates the encrypted password. Encrypted password should be placed in the configuration file with the attribute encrypted='true' 
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - eg: <property id='xyz'  value='<encrypted password>' encrypted='true' />
+
+2021-10-27 14:14:26 INFO  - DcQuickDeploy - UTILITY EXAMPLE:
+2021-10-27 14:14:26 INFO  - DcQuickDeploy -  dc_quick_deploy.bat -encrypt=<plain text password>
+2021-10-27 14:16:35 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 14:16:35
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 14:16:35 DEBUG - DcQuickDeploy - Error while reading content of configuration files. Internal error message is : EC2AMAZ-TVQ70TN_Env.xml (指定されたファイルが見つかりません。)
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 
+There are one or more validation errors found.  
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  The provided input path file is either invalid or file with provided name do not exist.Provide the valid file path in the argument  '-inputfile'
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - Please read the below Usage Details
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - Usage Details: 
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - NAME: Quick Deploy Utility 
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  This utility will run in two modes import and export. Default mode is import if not specified.
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  To run in default Import mode:
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  This utility will take as input an XML file that specifies the details of how the environment should be created including
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  pre-configured choices for software versions, applications, components and parameter settings.
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  When this utility is completed, a new environment will have been created in the Deployment Center and the deploy scripts automatically generated.
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  The next step would be for you to execute the deploy scripts on the target machine(s) to complete the installation. 
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for naming the quick-deploy environment>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  	-inputFile=<This is absolute file path of *quick_deploy_configuration.xml, that specify all the configuration related to quick-deploy.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - The following list are the optional arguments for this utility. 
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  	-machine=<This indicates name of the machine. The script will be generated for this specified machine.
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  		   This parameter will take current machine name of the user by default if is not specified.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -   	-platform=<This indicate the platform whether it is windows/linux or any other OS platform. The script will be generated for specified machine platform.
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -   		   This parameter will take machine platform of the user by default if is not specified.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -         -scriptDirectoryName=<This indicates the root directory name under which we want to create the deployment script Zip files .
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -                      This parameter will take script directory name provided by user, if not provided then default value would be current timestamp. 
+			 Also script directory name value should only have characters ,digits and underscore. It should not allow spaces and special characters.>
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -         -scriptsDir=<Deployment Center Script Generation Directory
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -                      This parameter will generate the deploy scripts into the location specified by the -scriptsDir which is pre-configured by the administrator.>
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -    EXAMPLE:
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpassword=dcadmin -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -environment=test_env -inputFile=C:\quick_deploy_input.xml
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -                  -dcusername=dcadmin -dcpasswordfile=C:\deploymentcenter.pwf -machine=pni6wxyz -platform=wntx64 -scriptsDir=scriptsDir1
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  
+ To run in Export mode:
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - SYNTAX:
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-mode=<This argument would be used to specify the mode. Allowed values for modes are : import or export>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-environment=<This argument would be used for name of the environment in the DC to export.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  	-exportfile=<This is absolute file path where the Quick deploy file would be exported.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-exportType=<The export type. Allowed values for export type are: Full or Lean.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-dcusername=<The deployment center username.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-dcpassword=<The deployment center password.>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-dcpasswordFile=<A password file that contains an encrypted password for the deployment center username>
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	-dcurl=<The deployment center url. It should be up and running. For instance: http://localhost:8080/deploymentcenter > 
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - 	dc_quick_deploy.bat -dcurl=http://localhost:8080/deploymentcenter -mode=export -environment=test_env
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -                  -exportType=Full -exportfile=C:\quick_deploy.xml -dcusername=dcadmin -dcpassword=dcadmin
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - --------------------------------------------------------------------------------------------------------------
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - NAME:  Password Encryption Utility (Optional)
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - DESCRIPTION:
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - This utility is optional and generates the encrypted password. Encrypted password should be placed in the configuration file with the attribute encrypted='true' 
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - eg: <property id='xyz'  value='<encrypted password>' encrypted='true' />
+
+2021-10-27 14:16:35 INFO  - DcQuickDeploy - UTILITY EXAMPLE:
+2021-10-27 14:16:35 INFO  - DcQuickDeploy -  dc_quick_deploy.bat -encrypt=<plain text password>
+2021-10-27 14:17:15 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 14:17:15
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 14:17:15 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.4"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.4"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-TVQ70TN"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="DCSERVER" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_EC2AMAZ-TVQ70TN"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_cmdpred_DBConfig" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_cmdpred_DatabaseServerOptions" value="MSSQLServer"/>
+            <property id="aws2_cmdpred_DBHost" value="EC2AMAZ-TVQ70TN"/>
+            <property id="aws2_cmdpred_DBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+            <property id="aws2_cmdpred_DBSystemUser" value="sa"/>
+            <property id="aws2_cmdpred_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_cmdpred_DBSystemUserPassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\Java\jdk11.0.7_10"/>
+        <property id="MachineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-27 14:17:15 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-TVQ70TN_Env
+Input file = quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-27 14:18:26 INFO  - DcQuickDeploy - 
+The following error(s) occurred while executing this utilityvalidation-:
+There are one or more validation errors in the component "FSC(Internal ID=fnd0_fsc,Machine=EC2AMAZ-TVQ70TN)". Please fix the errors and try again.
+Validation Error:The "FSC Server ID ( Internal ID = fnd0_fscServerID )" field value can only contain letters, numbers and underscore ( _ ).
+
+
+2021-10-27 14:25:00 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 14:25:00
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 14:25:00 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.4"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.4"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-TVQ70TN"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="DCSERVER" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_cmdpred_DBConfig" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_cmdpred_DatabaseServerOptions" value="MSSQLServer"/>
+            <property id="aws2_cmdpred_DBHost" value="EC2AMAZ-TVQ70TN"/>
+            <property id="aws2_cmdpred_DBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+            <property id="aws2_cmdpred_DBSystemUser" value="sa"/>
+            <property id="aws2_cmdpred_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_cmdpred_DBSystemUserPassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\Java\jdk11.0.7_10"/>
+        <property id="MachineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-27 14:25:00 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-TVQ70TN_Env
+Input file = quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-27 14:26:26 INFO  - DcQuickDeploy - 
+The deploy script for the  "EC2AMAZ-TVQ70TN_Env" environment has been successfully generated!!
+2021-10-27 14:26:26 INFO  - DcQuickDeploy - 
+The generated deploy script(s) are located on the "172.16.1.29" machine at the following location:
+2021-10-27 14:26:26 INFO  - DcQuickDeploy - C:\DEPLOY~1\REPOSI~1\deploy_scripts\EC2AMAZ-TVQ70TN_Env\install\20211027142615UTC
+
+2021-10-27 14:26:26 INFO  - DcQuickDeploy - 
+
+2021-10-27 14:26:26 INFO  - DcQuickDeploy - WARNING: 
+2021-10-27 14:26:26 INFO  - DcQuickDeploy - 
+The component "Command Prediction Service Configuration" (Internal ID= "aws2_cmdpred_DBConfig", Machine= "EC2AMAZ-TVQ70TN") specified in the quick deploy file could not be added into the environment "EC2AMAZ-TVQ70TN_Env", because the package "awa0awassistant" is not provided in the quick deploy file. To correct the issue, please modify the quick deploy file to add the entry of "awa0awassistant" under <quickDeployApplications> and re-execute the utility.
+
+The component "Visualization Server Manager" (Internal ID= "aws2_visservermanager", Machine= "EC2AMAZ-TVQ70TN") specified in the quick deploy file could not be added into the environment "EC2AMAZ-TVQ70TN_Env", because the package "awv0activeworkspacevis" is not provided in the quick deploy file. To correct the issue, please modify the quick deploy file to add the entry of "awv0activeworkspacevis" under <quickDeployApplications> and re-execute the utility.
+
+The component "Visualization Pool Assigner" (Internal ID= "aws2_vispoolassigner", Machine= "EC2AMAZ-TVQ70TN") specified in the quick deploy file could not be added into the environment "EC2AMAZ-TVQ70TN_Env", because the package "awv0activeworkspacevis" is not provided in the quick deploy file. To correct the issue, please modify the quick deploy file to add the entry of "awv0activeworkspacevis" under <quickDeployApplications> and re-execute the utility.
+2021-10-27 14:26:26 INFO  - DcQuickDeploy - 
+
+2021-10-27 14:32:36 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 14:32:36
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 14:32:36 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.4"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.4"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-TVQ70TN"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="DCSERVER" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\Java\jdk11.0.7_10"/>
+        <property id="MachineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-27 14:32:36 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-TVQ70TN_Env
+Input file = quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-27 14:33:36 INFO  - DcQuickDeploy - 
+The deploy script for the  "EC2AMAZ-TVQ70TN_Env" environment has been successfully generated!!
+2021-10-27 14:33:36 INFO  - DcQuickDeploy - 
+The generated deploy script(s) are located on the "172.16.1.29" machine at the following location:
+2021-10-27 14:33:36 INFO  - DcQuickDeploy - C:\DEPLOY~1\REPOSI~1\deploy_scripts\EC2AMAZ-TVQ70TN_Env\install\20211027143329UTC
+
+2021-10-27 15:04:27 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 15:04:27
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 15:04:27 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.4"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.4"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-TVQ70TN"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="DCSERVER" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\Java\jdk11.0.7_10"/>
+        <property id="MachineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-27 15:04:27 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-TVQ70TN_Env
+Input file = quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-27 15:05:26 INFO  - DcQuickDeploy - 
+The deploy script for the  "EC2AMAZ-TVQ70TN_Env" environment has been successfully generated!!
+2021-10-27 15:05:26 INFO  - DcQuickDeploy - 
+The generated deploy script(s) are located on the "172.16.1.29" machine at the following location:
+2021-10-27 15:05:26 INFO  - DcQuickDeploy - C:\DEPLOY~1\REPOSI~1\deploy_scripts\EC2AMAZ-TVQ70TN_Env\install\20211027150519UTC
+
+2021-10-27 16:36:40 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 16:36:40
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 16:36:40 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.4"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.4"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-TVQ70TN"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="DCSERVER" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\Java\jdk11.0.7_10"/>
+        <property id="MachineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-27 16:36:40 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-TVQ70TN_Env
+Input file = quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-27 16:37:58 INFO  - DcQuickDeploy - 
+The deploy script for the  "EC2AMAZ-TVQ70TN_Env" environment has been successfully generated!!
+2021-10-27 16:37:58 INFO  - DcQuickDeploy - 
+The generated deploy script(s) are located on the "172.16.1.29" machine at the following location:
+2021-10-27 16:37:58 INFO  - DcQuickDeploy - C:\DEPLOY~1\REPOSI~1\deploy_scripts\EC2AMAZ-TVQ70TN_Env\install\20211027163742UTC
+
+2021-10-27 17:10:32 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-27 17:10:32
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-TVQ70TN_Env -dcusername=****** -inputfile=quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+2021-10-27 17:10:32 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.4"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.4"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-TVQ70TN" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-TVQ70TN"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-TVQ70TN" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-TVQ70TN" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\Java\jdk11.0.7_10"/>
+        <property id="MachineUser" value="EC2AMAZ-TVQ70TN\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-27 17:10:32 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-TVQ70TN_Env
+Input file = quick_deploy_created\EC2AMAZ-TVQ70TN_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-27 17:11:39 INFO  - DcQuickDeploy - 
+The deploy script for the  "EC2AMAZ-TVQ70TN_Env" environment has been successfully generated!!
+2021-10-27 17:11:39 INFO  - DcQuickDeploy - 
+The generated deploy script(s) are located on the "172.16.1.29" machine at the following location:
+2021-10-27 17:11:39 INFO  - DcQuickDeploy - C:\DEPLOY~1\REPOSI~1\deploy_scripts\EC2AMAZ-TVQ70TN_Env\install\20211027171128UTC
+
+2021-10-28 00:50:11 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-28 00:50:11
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-81CFK3V_Env -dcusername=****** -inputfile=quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+2021-10-28 00:50:11 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.4"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.4"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-81CFK3V"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\jdk-11.0.10.9\"/>
+        <property id="MachineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-28 00:50:11 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-81CFK3V_Env
+Input file = quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-28 00:51:24 INFO  - DcQuickDeploy - 
+The deploy script for the  "EC2AMAZ-81CFK3V_Env" environment has been successfully generated!!
+2021-10-28 00:51:24 INFO  - DcQuickDeploy - 
+The generated deploy script(s) are located on the "172.16.1.29" machine at the following location:
+2021-10-28 00:51:24 INFO  - DcQuickDeploy - C:\DEPLOY~1\REPOSI~1\deploy_scripts\EC2AMAZ-81CFK3V_Env\install\20211028005107UTC
+
+2021-10-28 00:54:06 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-28 00:54:06
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-81CFK3V_Env -dcusername=****** -inputfile=quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+2021-10-28 00:54:06 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.3"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.3"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-81CFK3V"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\jdk-11.0.10.9\"/>
+        <property id="MachineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-28 00:54:06 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-81CFK3V_Env
+Input file = quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-28 00:54:07 INFO  - DcQuickDeploy - 
+The following error(s) occurred while executing this utility008-DCQD006:
+The software "Foundation 13.2.0.3" cannot be added into an Environment "EC2AMAZ-81CFK3V_Env". "Foundation 13.2.0.3" is either not supported or invalid for the existing configuration.
+Please check that the software is compatible with the current configuration or the provided software in configuration file exist on the repository.
+If provided software in configuration file do not exist in the Deployment center repository.
+Corrective Action : Download these software from GTAC and copy it into the software repository or validate that the software version specified in the configuration file is correct, if not, specify the correct software version. 
+
+
+2021-10-28 00:55:02 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-28 00:55:02
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-81CFK3V_Env -dcusername=****** -inputfile=quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+2021-10-28 00:55:02 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.3"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.3"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-81CFK3V"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\jdk-11.0.10.9\"/>
+        <property id="MachineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-28 00:55:02 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-81CFK3V_Env
+Input file = quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-28 00:55:03 INFO  - DcQuickDeploy - 
+The following error(s) occurred while executing this utility008-DCQD006:
+The software "Foundation 13.2.0.3" cannot be added into an Environment "EC2AMAZ-81CFK3V_Env". "Foundation 13.2.0.3" is either not supported or invalid for the existing configuration.
+Please check that the software is compatible with the current configuration or the provided software in configuration file exist on the repository.
+If provided software in configuration file do not exist in the Deployment center repository.
+Corrective Action : Download these software from GTAC and copy it into the software repository or validate that the software version specified in the configuration file is correct, if not, specify the correct software version. 
+
+
+2021-10-28 01:00:57 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-28 01:00:56
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-81CFK3V_Env -dcusername=****** -inputfile=quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+2021-10-28 01:00:57 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.3"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.3"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-81CFK3V"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\jdk-11.0.10.9\"/>
+        <property id="MachineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-28 01:00:57 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-81CFK3V_Env
+Input file = quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-28 01:02:03 INFO  - DcQuickDeploy - 
+The deploy script for the  "EC2AMAZ-81CFK3V_Env" environment has been successfully generated!!
+2021-10-28 01:02:03 INFO  - DcQuickDeploy - 
+The generated deploy script(s) are located on the "172.16.1.29" machine at the following location:
+2021-10-28 01:02:03 INFO  - DcQuickDeploy - C:\DEPLOY~1\REPOSI~1\deploy_scripts\EC2AMAZ-81CFK3V_Env\install\20211028010151UTC
+
+2021-10-28 01:03:38 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-28 01:03:38
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-81CFK3V_Env -dcusername=****** -inputfile=quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+2021-10-28 01:03:38 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.3"/>
+        <software id="MicroServiceFramework" version="5.2.3"/>
+        <software id="ActiveWorkspace" version="5.2.2"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-81CFK3V"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\jdk-11.0.10.9\"/>
+        <property id="MachineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-28 01:03:38 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-81CFK3V_Env
+Input file = quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-28 01:03:39 INFO  - DcQuickDeploy - 
+The following error(s) occurred while executing this utility008-DCQD011:
+The following software were not found in the repository:
+- ActiveWorkspace 5.2.2
+Corrective Action : Download these software from GTAC and copy it into the software repository or validate that the software version specified in the configuration file is correct, if not, specify the correct software version.
+
+
+2021-10-28 01:04:14 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+command is executed at: 2021-10-28 01:04:14
+Command used : 
+dc_quick_deploy.bat -dcurl=http://172.16.1.29:8080/deploymentcenter -dcpassword=****** -environment=EC2AMAZ-81CFK3V_Env -dcusername=****** -inputfile=quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+2021-10-28 01:04:14 DEBUG - DcQuickDeploy - 
+-------------------------------------------------------------------------
+Content of quick_deploy_input.xml
+-------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quickDeployConfig configName="@TARGET_ENVIRONMENT@" version="1.0">
+    <archType types="J2EE"/>
+    <quickDeploySoftware>
+        <software id="Foundation" version="13.2.0.3"/>
+        <software id="MicroServiceFramework" version="5.2.2"/>
+        <software id="ActiveWorkspace" version="5.2.3"/>
+    </quickDeploySoftware>
+    <quickDeployApplications>
+        <package id="awv0visualization2dviewer"/>
+        <package id="visualization3d"/>
+        <package id="sample"/>
+    </quickDeployApplications>
+    <quickDeployClients>
+        <client id="fnd0_4tierrichclient" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+        <client id="fnd0_tccs" machineName="EC2AMAZ-81CFK3V" massDeploy="false" platform="wntx64"/>
+    </quickDeployClients>
+    <quickDeployComponents>
+        <component id="fnd0_serverpool_DBConfig" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_serverManagerDatabaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_serverManagerDBSystemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerMSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_serverManagerDBPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="aws2_client_builder" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_builder_publish" value="true"/>
+            <property id="aws2_client_builder_locales" value="en_US,ja_JP"/>
+        </component>
+        <component id="aws2_client_gateway_webtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_client_gateway_webtier_useSSL" value="http"/>
+        </component>
+        <component id="fnd0_j2ee_tcwebtier" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_j2ee_treeCachePeersHost" value="EC2AMAZ-81CFK3V"/>
+        </component>
+        <component id="fnd0_tcdbserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_MSSQLDBUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_systemUserPassword" value="******"  encrypted="false"/>
+            <property id="fnd0_databaseServerOptions" value="MSSQLServer"/>
+            <property id="fnd0_MSSQLUtf8ModeCheck" value="true"/>
+            <property id="fnd0_MSSQLDBUser" value="infodba"/>
+            <property id="fnd0_dbPath" value="C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA"/>
+        </component>
+        <component id="fnd0_serverManager" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_startUpMode" value="fnd0_serviceDaemon"/>
+        </component>
+        <component id="aws2_indexingengine" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_runAsService" value="runAsService"/>
+            <property id="aws2_indexingEngineUserPassword" value="******"  encrypted="false"/>
+            <property id="aws2_machineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+            <property id="aws2_machinePassword" value="******"  encrypted="false"/>
+        </component>
+        <component id="fnd0_microservice" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="fnd0_microservice_keyStorePassword" value="******"  encrypted="false"/>
+            <property id="fnd0_ms_file_repo_file_storage_path" value="C:\Apps\Siemens\Teamcenter\file_repo"/>
+        </component>
+        <component id="aws2_ftsIndexer" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+            <property id="aws2_extractionEndTime" value=""/>
+            <property id="aws2_extractionStartTime" value="2019-07-08 14:27"/>
+        </component>
+        <component id="fnd0_corporateserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_licensingserver" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="fnd0_fsc" machineName="EC2AMAZ-81CFK3V" platform="wntx64">
+	        <property id="fnd0_fscServerID" value="FSC_TESTENV"/>
+            <property id="fnd0_osUserOptions" value="localAccount"/>
+        </component>
+        <component id="aws2_visservermanager" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+        <component id="aws2_vispoolassigner" machineName="EC2AMAZ-81CFK3V" platform="wntx64"/>
+    </quickDeployComponents>
+    <quickDeployProperties>
+        <property id="InstallDirectory" value="C:\Apps\Siemens\Teamcenter\tc_root"/>
+        <property id="JavaHome" value="C:\Apps\jdk-11.0.10.9\"/>
+        <property id="MachineUser" value="EC2AMAZ-81CFK3V\Administrator"/>
+        <property id="MachineUserPassword" value="******"  encrypted="false"/>
+    </quickDeployProperties>
+</quickDeployConfig>
+-------------------------------------------------------------------------
+
+2021-10-28 01:04:14 INFO  - DcQuickDeploy - 
+Target Environment = EC2AMAZ-81CFK3V_Env
+Input file = quick_deploy_build\created\EC2AMAZ-81CFK3V_Env.xml
+Processing the tasks listed in the input file. Please wait...
+2021-10-28 01:05:19 INFO  - DcQuickDeploy - 
+The deploy script for the  "EC2AMAZ-81CFK3V_Env" environment has been successfully generated!!
+2021-10-28 01:05:19 INFO  - DcQuickDeploy - 
+The generated deploy script(s) are located on the "172.16.1.29" machine at the following location:
+2021-10-28 01:05:19 INFO  - DcQuickDeploy - C:\DEPLOY~1\REPOSI~1\deploy_scripts\EC2AMAZ-81CFK3V_Env\install\20211028010508UTC
+

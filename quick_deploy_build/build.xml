@@ -1,0 +1,15 @@
+<project name="createQuickDeployFileFromTemplate" default="copyTemplate" basedir=".">
+	<target name="copyTemplate">
+		<sequential>
+		<copy file="template\${template.file}.xml" tofile="created\${target.environment}.xml" overwrite="true">
+		<filterset>
+			<filter token="JAVA_HOME" value="${jdk.home}" />	
+			<filter token="TARGET_MACHINE" value="${target.machine}" />
+			<filter token="SYS_USER" value="${system.name}" />
+			<filter token="SYS_PASS" value="${system.passwd}" />
+			<filter token="STD_PASS" value="${target.passwd}" />
+		</filterset>
+		</copy>
+		</sequential>
+	</target>
+</project>

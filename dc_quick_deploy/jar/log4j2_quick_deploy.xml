@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- @<COPYRIGHT>@ ================================================== Copyright 
+	2019. Siemens Product Lifecycle Management Software Inc. All Rights Reserved. 
+	================================================== @<COPYRIGHT>@ -->
+
+<Configuration>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%m%n" />
+			<LevelRangeFilter minLevel="INFO" maxLevel="INFO"
+				onMatch="ACCEPT" onMismatch="DENY" />
+		</Console>
+		<RollingFile name="quick_deploy_debug"
+			fileName="${sys:UTILITY_DIR}/logs/quick_deploy_debug.log"
+			filePattern="${sys:UTILITY_DIR}/logs/quick_deploy_debug_%d{yyyy-MM-dd}-%i.log.zip"
+			append="true">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p - %c{1} - %m%n</pattern>
+			</PatternLayout>
+			<Filters>
+				<ThresholdFilter level="DEBUG" onMatch="ACCEPT"
+					onMismatch="DENY" />
+				<ThresholdFilter level="INFO" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5MB" />
+				<TimeBasedTriggeringPolicy interval="12"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="quick_deploy_error"
+			fileName="${sys:UTILITY_DIR}/logs/quick_deploy_error.log"
+			filePattern="${sys:UTILITY_DIR}/logs/quick_deploy_error_%d{yyyy-MM-dd}-%i.log.zip"
+			append="true">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p - %c{1} - %m%n</pattern>
+			</PatternLayout>
+			<ThresholdFilter level="ERROR" onMatch="ACCEPT"
+				onMismatch="DENY" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5MB" />
+				<TimeBasedTriggeringPolicy interval="12"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="quick_deploy_rest_service"
+			fileName="${sys:UTILITY_DIR}/logs/quick_deploy_rest_service.log"
+			filePattern="${sys:UTILITY_DIR}/logs/quick_deploy_rest_service_%d{yyyy-MM-dd}-%i.log.zip"
+			append="true">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p - %c{1} - %m%n</pattern>
+			</PatternLayout>
+			<Filters>
+				<ThresholdFilter level="DEBUG" onMatch="ACCEPT"
+					onMismatch="DENY" />
+				<ThresholdFilter level="INFO" onMatch="ACCEPT"
+					onMismatch="DENY" />
+				<ThresholdFilter level="ERROR" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5MB" />
+				<TimeBasedTriggeringPolicy interval="12"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+	</Appenders>
+
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="console" />
+		</Root>
+		<Logger name="com.siemens.deploymentcenter.restclient"
+			level="debug">
+			<AppenderRef ref="quick_deploy_rest_service" />
+		</Logger>
+		<Logger name="com.siemens.deploymentcenter.quickdeploy"
+			level="debug">
+			<AppenderRef ref="quick_deploy_debug" />
+			<AppenderRef ref="quick_deploy_error" />
+		</Logger>
+	</Loggers>
+</Configuration>
