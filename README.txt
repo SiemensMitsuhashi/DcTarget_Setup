@@ -9,3 +9,4 @@ Deploymentcenterサーバーを起動。接続確認。
 ⑤展開されたファイルをZドライブから見つけて任意の場所に展開
 ⑥deploy.bat -dcusername=dcadmin -dcpassword=dcadmin -softwareLocation=Z:\software
 
+test
