@@ -36,8 +36,14 @@ Start-Service SQLSERVERAGENT
      }
 
 
-$CHOCO_TARGETS = @('googlechrome', 'notepadplusplus' , '7zip','tomcat', 'ant')
+$CHOCO_TARGETS = @('googlechrome', 'notepadplusplus' , '7zip','tomcat', 'ant','git','gh')
      ForEach ($target in $CHOCO_TARGETS) {
          choco install $target /y
 		}
 
+
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+cd C:\
+
+git clone https://github.com/SiemensMitsuhashi/DcTarget_Setup.git
